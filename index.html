@@ -92,14 +92,14 @@ textarea{min-height:105px;resize:vertical}
 
 <section class="section card">
   <h2>Departmanlarımız</h2>
-  <p class="lead">Roketin tasarımından uçuşuna kadar farklı disiplinlerde birlikte çalışıyoruz. Başvurunda ilgilendiğin departmanı ve çalışma alanını seçebilirsin.</p>
+  <p class="lead">Roketin tasarımından uçuşuna kadar farklı disiplinlerde birlikte çalışıyoruz.</p>
   <div class="grid">
-    <div class="dept"><div class="icon">◒</div><b>AERODİNAMİK</b><small>Aerodinamik Tasarım • CFD Analizi</small></div>
-    <div class="dept"><div class="icon">◇</div><b>YAPISAL</b><small>Mekanik Tasarım • Yapısal Analiz • Üretim</small></div>
-    <div class="dept"><div class="icon">▣</div><b>AVİYONİK</b><small>Uçuş Bilgisayarı • Haberleşme &amp; Telemetri • Elektronik &amp; Güç</small></div>
-    <div class="dept"><div class="icon">◉</div><b>KURTARMA</b><small>Paraşüt Sistemi • Ayrılma Sistemleri • Kurtarma Analizi &amp; Test</small></div>
-    <div class="dept"><div class="icon">◆</div><b>GÖREV YÜKÜ</b><small>Payload Tasarımı • Payload Elektroniği</small></div>
-    <div class="dept"><div class="icon">⌁</div><b>UÇUŞ SİMÜLASYONU</b><small>OpenRocket • Uçuş Analizi</small></div>
+    <div class="dept"><div class="icon">◒</div><b>AERODİNAMİK</b><small>Aerodinamik Tasarım ve CFD Analizi.</small></div>
+    <div class="dept"><div class="icon">◇</div><b>YAPISAL</b><small>Mekanik Tasarım, Yapısal Analiz ve Üretim.</small></div>
+    <div class="dept"><div class="icon">▣</div><b>AVİYONİK</b><small>Uçuş Bilgisayarı, Haberleşme &amp; Telemetri, Elektronik &amp; Güç.</small></div>
+    <div class="dept"><div class="icon">◉</div><b>KURTARMA</b><small>Paraşüt Sistemi, Ayrılma Sistemleri, Kurtarma Analizi &amp; Test.</small></div>
+    <div class="dept"><div class="icon">◆</div><b>GÖREV YÜKÜ</b><small>Payload Tasarımı ve Payload Elektroniği.</small></div>
+    <div class="dept"><div class="icon">⌁</div><b>UÇUŞ SİMÜLASYONU</b><small>OpenRocket &amp; Uçuş Analizi.</small></div>
   </div>
 </section>
 
@@ -147,7 +147,7 @@ textarea{min-height:105px;resize:vertical}
 
   <div id="dynamic" class="dynamic" style="display:none">
     <h2>İlgi Alanların</h2>
-    <p class="lead">Seçtiğin departmana göre çalışmak istediğin alanları işaretleyebilirsin.</p>
+    <p class="lead">Seçtiğin departmana göre ilgilendiğin çalışma alanlarını seçebilirsin.</p>
 
     <div id="aero" class="dq" style="display:none">
       <label>Aerodinamik</label>
@@ -229,51 +229,43 @@ const deptMap = {
   "Uçuş Simülasyonu": "sim"
 };
 
-function getSelectedDepartments() {
-  return [...document.querySelectorAll(".dept-check:checked")]
-    .map(x => x.dataset.dept);
+function selectedDepartments() {
+  return [...document.querySelectorAll(".dept-check:checked")].map(x => x.dataset.dept);
 }
 
 function updateDepartmentFields() {
-  const selected = getSelectedDepartments();
+  const selected = selectedDepartments();
 
-  const hidden = document.getElementById("departmanHidden");
-  if (hidden) hidden.value = selected.join(", ");
+  document.getElementById("departmanHidden").value = selected.join(", ");
 
   const dynamic = document.getElementById("dynamic");
-  if (dynamic) dynamic.style.display = selected.length ? "block" : "none";
+  dynamic.style.display = selected.length ? "block" : "none";
 
   Object.values(deptMap).forEach(id => {
     const box = document.getElementById(id);
     if (box) box.style.display = "none";
   });
 
-  selected.forEach(name => {
-    const id = deptMap[name];
-    const box = document.getElementById(id);
+  selected.forEach(dept => {
+    const box = document.getElementById(deptMap[dept]);
     if (box) box.style.display = "block";
   });
 }
 
 function collectDepartmentAnswers() {
-  const selected = getSelectedDepartments();
   const lines = [];
 
-  selected.forEach(dept => {
-    const id = deptMap[dept];
-    const box = document.getElementById(id);
+  selectedDepartments().forEach(dept => {
+    const box = document.getElementById(deptMap[dept]);
     if (!box) return;
 
     const answers = [...box.querySelectorAll('input[type="checkbox"]:checked')]
-      .map(el => el.value);
+      .map(input => input.value);
 
-    if (answers.length) {
-      lines.push("[" + dept + "] " + answers.join(", "));
-    }
+    if (answers.length) lines.push("[" + dept + "] " + answers.join(", "));
   });
 
-  const hidden = document.getElementById("departmanOzelCevaplari");
-  if (hidden) hidden.value = lines.join("\n");
+  document.getElementById("departmanOzelCevaplari").value = lines.join("\n");
 }
 
 document.querySelectorAll(".dept-check").forEach(cb => {
