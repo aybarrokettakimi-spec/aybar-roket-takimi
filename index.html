@@ -92,17 +92,15 @@ textarea{min-height:105px;resize:vertical}
 
 <section class="section card">
   <h2>Departmanlarımız</h2>
+  <p class="lead">Roketin tasarımından uçuşuna kadar farklı disiplinlerde birlikte çalışıyoruz. Başvurunda ilgilendiğin departmanı ve çalışma alanını seçebilirsin.</p>
   <div class="grid">
-    <div class="dept"><div class="icon">◒</div><b>AERODİNAMİK</b><small>Aerodinamik Tasarım ve CFD Analizi.</small></div>
-    <div class="dept"><div class="icon">♨</div><b>AEROTERMAL</b><small>Isı Transferi, Termal Analiz ve CFD Analizi.</small></div>
-    
-    <div class="dept"><div class="icon">◇</div><b>YAPISAL</b><small>CAD Tasarımı, FEA Analizi ve Kompozit.</small></div>
-    <div class="dept"><div class="icon">⌁</div><b>UÇUŞ SİMÜLASYONU</b><small>OpenRocket ve MATLAB/Simulink.</small></div>
-    <div class="dept"><div class="icon">▣</div><b>AVİYONİK</b><small>Sensörler, telemetri, veri toplama ve elektronik sistemler.</small></div>
-    <div class="dept"><div class="icon">◉</div><b>PARAŞÜT SİSTEMİ</b><small>Paraşüt sistemi.</small></div>
+    <div class="dept"><div class="icon">◒</div><b>AERODİNAMİK</b><small>Aerodinamik Tasarım • CFD Analizi</small></div>
+    <div class="dept"><div class="icon">◇</div><b>YAPISAL</b><small>Mekanik Tasarım • Yapısal Analiz • Üretim</small></div>
+    <div class="dept"><div class="icon">▣</div><b>AVİYONİK</b><small>Uçuş Bilgisayarı • Haberleşme &amp; Telemetri • Elektronik &amp; Güç</small></div>
+    <div class="dept"><div class="icon">◉</div><b>KURTARMA</b><small>Paraşüt Sistemi • Ayrılma Sistemleri • Kurtarma Analizi &amp; Test</small></div>
+    <div class="dept"><div class="icon">◆</div><b>GÖREV YÜKÜ</b><small>Payload Tasarımı • Payload Elektroniği</small></div>
+    <div class="dept"><div class="icon">⌁</div><b>UÇUŞ SİMÜLASYONU</b><small>OpenRocket • Uçuş Analizi</small></div>
   </div>
-
-
 </section>
 
 <form id="applicationForm" action="https://formsubmit.co/aybarrokettakimi@gmail.com" method="POST" enctype="multipart/form-data">
@@ -125,81 +123,79 @@ textarea{min-height:105px;resize:vertical}
 
   <label>Departman tercihin *</label>
   <div class="choices">
-    <div class="choice"><label><input type="checkbox" class="dept-check" data-dept="Aerodinamik" onchange="update()"> Aerodinamik</label></div>
-    <div class="choice"><label><input type="checkbox" class="dept-check" data-dept="Aerotermal" onchange="update()"> Aerotermal</label></div>
-        <div class="choice"><label><input type="checkbox" class="dept-check" data-dept="Yapısal" onchange="update()"> Yapısal</label></div>
-    <div class="choice"><label><input type="checkbox" class="dept-check" data-dept="Uçuş Simülasyonu" onchange="update()"> Uçuş Simülasyonu</label></div>
-    <div class="choice"><label><input type="checkbox" class="dept-check" data-dept="Aviyonik" onchange="update()"> Aviyonik</label></div>
-    <div class="choice"><label><input type="checkbox" class="dept-check" data-dept="Paraşüt Sistemi" onchange="update()"> Paraşüt Sistemi</label></div>
+    <div class="choice"><label><input type="checkbox" class="dept-check" data-dept="Aerodinamik" name="departman" value="Aerodinamik"> Aerodinamik</label></div>
+    <div class="choice"><label><input type="checkbox" class="dept-check" data-dept="Yapısal" name="departman" value="Yapısal"> Yapısal</label></div>
+    <div class="choice"><label><input type="checkbox" class="dept-check" data-dept="Aviyonik" name="departman" value="Aviyonik"> Aviyonik</label></div>
+    <div class="choice"><label><input type="checkbox" class="dept-check" data-dept="Kurtarma" name="departman" value="Kurtarma"> Kurtarma</label></div>
+    <div class="choice"><label><input type="checkbox" class="dept-check" data-dept="Görev Yükü" name="departman" value="Görev Yükü"> Görev Yükü</label></div>
+    <div class="choice"><label><input type="checkbox" class="dept-check" data-dept="Uçuş Simülasyonu" name="departman" value="Uçuş Simülasyonu"> Uçuş Simülasyonu</label></div>
   </div>
 
-  <input type="hidden" name="departman" id="departmanHidden">
-  <input type="hidden" name="departman_aerodinamik" id="deptAerodinamik">
-  <input type="hidden" name="departman_aerotermal" id="deptAerotermal">
-  <input type="hidden" name="departman_yapisal" id="deptYapisal">
-  <input type="hidden" name="departman_ucus_simulasyonu" id="deptSim">
-  <input type="hidden" name="departman_aviyonik" id="deptAv">
-  <input type="hidden" name="departman_parasut_sistemi" id="deptParasut">
-  <input type="hidden" name="departman_ozel_cevaplari" id="departmanOzelCevaplari">
+  <input type="hidden" id="departmanHidden" name="departman_tercihleri">
+  <input type="hidden" id="departmanOzelCevaplari" name="departman_ozel_cevaplari">
 
-  <label>Birinci tercihin hangisi?</label>
+  <label>Birinci tercihin hangisi? *</label>
   <select name="birinci_tercih" required>
-    <option>Seçiniz</option><option>Aerodinamik</option><option>Aerotermal</option>
-    <option>Yapısal</option><option>Uçuş Simülasyonu</option><option>Aviyonik</option><option>Paraşüt Sistemi</option>
+    <option value="">Seçiniz</option>
+    <option>Aerodinamik</option>
+    <option>Yapısal</option>
+    <option>Aviyonik</option>
+    <option>Kurtarma</option>
+    <option>Görev Yükü</option>
+    <option>Uçuş Simülasyonu</option>
   </select>
 
-  <div id="dynamic" class="dynamic">
-    <h2>Departmana Özel Teknik Bölüm</h2>
+  <div id="dynamic" class="dynamic" style="display:none">
+    <h2>İlgi Alanların</h2>
+    <p class="lead">Seçtiğin departmana göre çalışmak istediğin alanları işaretleyebilirsin.</p>
 
     <div id="aero" class="dq" style="display:none">
-      <label>Aerodinamikte hangi alanlarla ilgileniyorsun?</label>
+      <label>Aerodinamik</label>
       <div class="choices">
         <div class="choice"><label><input type="checkbox" name="aerodinamik_ilgi_alanlari" value="Aerodinamik Tasarım"> Aerodinamik Tasarım</label></div>
-        <div class="choice"><label><input type="checkbox" name="aerotermal_ilgi_alanlari" value="CFD Analizi"> CFD Analizi</label></div>
-      </div>
-      <label>Varsa kullandığın analiz / tasarım araçları</label><input name="aerodinamik_araclar" placeholder="ANSYS, Fluent, vb.">
-
-    </div>
-
-    <div id="thermal" class="dq" style="display:none">
-      <label>Aerotermalde hangi alanlarla ilgileniyorsun?</label>
-      <div class="choices">
-        <div class="choice"><label><input type="checkbox" name="aerotermal_ilgi_alanlari" value="Isı Transferi"> Isı Transferi</label></div>
-        <div class="choice"><label><input type="checkbox" name="aerotermal_ilgi_alanlari" value="Termal Analiz"> Termal Analiz</label></div>
-        <div class="choice"><label><input type="checkbox" name="aerotermal_ilgi_alanlari" value="CFD Analizi"> CFD Analizi</label></div>
+        <div class="choice"><label><input type="checkbox" name="aerodinamik_ilgi_alanlari" value="CFD Analizi"> CFD Analizi</label></div>
       </div>
     </div>
 
     <div id="struct" class="dq" style="display:none">
-      <label>Yapısal tarafta hangileriyle ilgileniyorsun?</label>
+      <label>Yapısal</label>
       <div class="choices">
-        <div class="choice"><label><input type="checkbox" name="yapisal_ilgi_alanlari" value="CAD Tasarımı"> CAD Tasarımı</label></div>
-        <div class="choice"><label><input type="checkbox" name="yapisal_ilgi_alanlari" value="FEA Analizi"> FEA Analizi</label></div>
-        <div class="choice"><label><input type="checkbox" name="yapisal_ilgi_alanlari" value="Kompozit"> Kompozit</label></div>
+        <div class="choice"><label><input type="checkbox" name="yapisal_ilgi_alanlari" value="Mekanik Tasarım"> Mekanik Tasarım</label></div>
+        <div class="choice"><label><input type="checkbox" name="yapisal_ilgi_alanlari" value="Yapısal Analiz"> Yapısal Analiz</label></div>
+        <div class="choice"><label><input type="checkbox" name="yapisal_ilgi_alanlari" value="Üretim"> Üretim</label></div>
       </div>
-      <label>Hangi yazılımları kullandın?</label><input name="yapisal_yazilimlar" placeholder="SolidWorks, CATIA, NX, ANSYS vb.">
-      <label>Yaptığın bir analiz / tasarım çalışmasını kısaca anlat.</label><textarea name="yapisal_analiz_tasarim_calismasi"></textarea>
-    </div>
-
-    <div id="sim" class="dq" style="display:none">
-      <label>Uçuş simülasyonunda hangilerini biliyorsun?</label>
-      <div class="choices">
-        <div class="choice"><label><input type="checkbox" name="ucus_simulasyonu_bilgi" value="OpenRocket"> OpenRocket</label></div>
-        <div class="choice"><label><input type="checkbox" name="ucus_simulasyonu_bilgi" value="MATLAB / Simulink"> MATLAB / Simulink</label></div>
-      </div>
-    </div>
-
-
-    <div id="parachute" class="dq" style="display:none">
-      <label>Paraşüt Sistemi ile ilgili deneyimin veya ilgin var mı?</label>
-      <textarea name="parasut_sistemi_deneyim_ilgi" placeholder="Varsa deneyimini, projen veya ilgilendiğin alanları kısaca anlat."></textarea>
     </div>
 
     <div id="av" class="dq" style="display:none">
-      <label>Aviyonik tarafında hangileriyle ilgileniyorsun?</label>
+      <label>Aviyonik</label>
       <div class="choices">
-        <div class="choice"><label><input type="checkbox" name="aviyonik_ilgi_alanlari" value="Sensörler"> Sensörler</label></div><div class="choice"><label><input type="checkbox" name="aviyonik_ilgi_alanlari" value="Mikrodenetleyici"> Mikrodenetleyici</label></div>
-        <div class="choice"><label><input type="checkbox" name="aviyonik_ilgi_alanlari" value="Telemetri"> Telemetri</label></div><div class="choice"><label><input type="checkbox" name="aviyonik_ilgi_alanlari" value="Veri Toplama"> Veri Toplama</label></div>
+        <div class="choice"><label><input type="checkbox" name="aviyonik_ilgi_alanlari" value="Uçuş Bilgisayarı"> Uçuş Bilgisayarı</label></div>
+        <div class="choice"><label><input type="checkbox" name="aviyonik_ilgi_alanlari" value="Haberleşme & Telemetri"> Haberleşme &amp; Telemetri</label></div>
+        <div class="choice"><label><input type="checkbox" name="aviyonik_ilgi_alanlari" value="Elektronik & Güç"> Elektronik &amp; Güç</label></div>
+      </div>
+    </div>
+
+    <div id="parachute" class="dq" style="display:none">
+      <label>Kurtarma</label>
+      <div class="choices">
+        <div class="choice"><label><input type="checkbox" name="kurtarma_ilgi_alanlari" value="Paraşüt Sistemi"> Paraşüt Sistemi</label></div>
+        <div class="choice"><label><input type="checkbox" name="kurtarma_ilgi_alanlari" value="Ayrılma Sistemleri"> Ayrılma Sistemleri</label></div>
+        <div class="choice"><label><input type="checkbox" name="kurtarma_ilgi_alanlari" value="Kurtarma Analizi & Test"> Kurtarma Analizi &amp; Test</label></div>
+      </div>
+    </div>
+
+    <div id="payload" class="dq" style="display:none">
+      <label>Görev Yükü</label>
+      <div class="choices">
+        <div class="choice"><label><input type="checkbox" name="gorev_yuku_ilgi_alanlari" value="Payload Tasarımı"> Payload Tasarımı</label></div>
+        <div class="choice"><label><input type="checkbox" name="gorev_yuku_ilgi_alanlari" value="Payload Elektroniği"> Payload Elektroniği</label></div>
+      </div>
+    </div>
+
+    <div id="sim" class="dq" style="display:none">
+      <label>Uçuş Simülasyonu</label>
+      <div class="choices">
+        <div class="choice"><label><input type="checkbox" name="ucus_simulasyonu_ilgi_alanlari" value="OpenRocket & Uçuş Analizi"> OpenRocket &amp; Uçuş Analizi</label></div>
       </div>
     </div>
   </div>
@@ -224,82 +220,74 @@ textarea{min-height:105px;resize:vertical}
 </div>
 
 <script>
-function getSelectedDepartments(){
-  return [...document.querySelectorAll('.dept-check:checked')].map(x => x.dataset.dept);
+const deptMap = {
+  "Aerodinamik": "aero",
+  "Yapısal": "struct",
+  "Aviyonik": "av",
+  "Kurtarma": "parachute",
+  "Görev Yükü": "payload",
+  "Uçuş Simülasyonu": "sim"
+};
+
+function getSelectedDepartments() {
+  return [...document.querySelectorAll(".dept-check:checked")]
+    .map(x => x.dataset.dept);
 }
 
-function update(){
-  const selected=getSelectedDepartments();
-  document.getElementById('departmanHidden').value=selected.join(', ');
+function updateDepartmentFields() {
+  const selected = getSelectedDepartments();
 
-  const deptFields={
-    'Aerodinamik':['deptAerodinamik','Aerodinamik'],
-    'Aerotermal':['deptAerotermal','Aerotermal'],
-    'Yapısal':['deptYapisal','Yapısal'],
-    'Uçuş Simülasyonu':['deptSim','Uçuş Simülasyonu'],
-    'Aviyonik':['deptAv','Aviyonik'],
-    'Paraşüt Sistemi':['deptParasut','Paraşüt Sistemi']
-  };
-  Object.values(deptFields).forEach(([id])=>document.getElementById(id).value='');
-  selected.forEach(name=>{
-    const pair=deptFields[name];
-    if(pair) document.getElementById(pair[0]).value=pair[1] + ' seçildi';
+  const hidden = document.getElementById("departmanHidden");
+  if (hidden) hidden.value = selected.join(", ");
+
+  const dynamic = document.getElementById("dynamic");
+  if (dynamic) dynamic.style.display = selected.length ? "block" : "none";
+
+  Object.values(deptMap).forEach(id => {
+    const box = document.getElementById(id);
+    if (box) box.style.display = "none";
   });
 
-  document.getElementById('dynamic').style.display=selected.length?'block':'none';
-  const map={'Aerodinamik':'aero','Aerotermal':'thermal','Yapısal':'struct','Uçuş Simülasyonu':'sim','Aviyonik':'av','Paraşüt Sistemi':'parachute'};
-  Object.values(map).forEach(id=>document.getElementById(id).style.display='none');
-  selected.forEach(name=>{
-    const target=map[name];
-    if(target) document.getElementById(target).style.display='block';
+  selected.forEach(name => {
+    const id = deptMap[name];
+    const box = document.getElementById(id);
+    if (box) box.style.display = "block";
   });
 }
 
-function collectDepartmentAnswers(){
-  const selected=getSelectedDepartments();
-  const sections=[
-    ['Aerodinamik','aero'],
-    ['Aerotermal','thermal'],
-    ['Yapısal','struct'],
-    ['Uçuş Simülasyonu','sim'],
-    ['Aviyonik','av'],
-    ['Paraşüt Sistemi','parachute']
-  ];
-  const lines=[];
+function collectDepartmentAnswers() {
+  const selected = getSelectedDepartments();
+  const lines = [];
 
-  sections.forEach(([dept,id])=>{
-    if(!selected.includes(dept)) return;
-    const box=document.getElementById(id);
-    if(!box) return;
-    const answers=[];
-    box.querySelectorAll('input, textarea, select').forEach(el=>{
-      let value='';
-      if(el.type==='checkbox'){
-        if(el.checked) value=el.value;
-      }else{
-        value=(el.value||'').trim();
-      }
-      if(!value || value==='Seçiniz') return;
-      const label=el.closest('.choice')?.querySelector('label')?.textContent?.trim() || el.previousElementSibling?.textContent?.trim() || el.name;
-      if(el.type==='checkbox'){
-        answers.push(label.replace(/\s+/g,' ') + ': ' + value);
-      }else{
-        answers.push(label.replace(/\s+/g,' ') + ': ' + value);
-      }
-    });
-    if(answers.length) lines.push('['+dept+']\n' + answers.join('\n'));
+  selected.forEach(dept => {
+    const id = deptMap[dept];
+    const box = document.getElementById(id);
+    if (!box) return;
+
+    const answers = [...box.querySelectorAll('input[type="checkbox"]:checked')]
+      .map(el => el.value);
+
+    if (answers.length) {
+      lines.push("[" + dept + "] " + answers.join(", "));
+    }
   });
 
-  document.getElementById('departmanOzelCevaplari').value=lines.join('\n\n');
+  const hidden = document.getElementById("departmanOzelCevaplari");
+  if (hidden) hidden.value = lines.join("\n");
 }
 
-document.getElementById('applicationForm').addEventListener('submit', function(){
-  update();
+document.querySelectorAll(".dept-check").forEach(cb => {
+  cb.addEventListener("change", updateDepartmentFields);
+});
+
+document.getElementById("applicationForm").addEventListener("submit", function() {
+  updateDepartmentFields();
   collectDepartmentAnswers();
 });
 
-// Keep the combined department field current even if the user submits via keyboard.
-update();
+updateDepartmentFields();
 </script>
 </body>
 </html>
+AYBAR_Roket_Takimi_FINAL.html
+HTML
